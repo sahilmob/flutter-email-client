@@ -15,13 +15,7 @@ class EmailApp extends StatelessWidget {
 
 class MyHomePage extends StatelessWidget {
   final String title;
-  var messsages = const [
-    "My first message",
-    "My second message",
-    "You won lottery",
-    "You should read this message",
-    "You won lottery again",
-  ];
+  var messsages = const [];
   MyHomePage({this.title});
   @override
   Widget build(BuildContext context) {
@@ -33,11 +27,14 @@ class MyHomePage extends StatelessWidget {
         itemCount: messsages.length,
         separatorBuilder: (BuildContext context, int index) => Divider(),
         itemBuilder: (BuildContext context, int index) {
-          var title = messsages[index];
+          var message = messsages[index];
           return ListTile(
-            title: Text(title),
+            title: Text(message['subject']),
             subtitle: Text(
-                "Subtitle which is very very long so everyone can read it, seet it"),
+              message['body'],
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+            ),
             isThreeLine: true,
             leading: CircleAvatar(
               child: Text("SM"),

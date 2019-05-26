@@ -1,0 +1,20 @@
+({
+	"subject": "My first message",
+	"body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam malesuada., Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam malesuada."
+},
+{
+	"subject": "My second message",
+	"body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam malesuada."
+},
+{
+	"subject": "You won lottery",
+	"body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam malesuada."
+},
+{
+	"subject": "You should read this message",
+	"body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam malesuada."
+},
+{
+	"subject": "You won lottery again",
+	"body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam malesuada."
+})
