@@ -25,6 +25,17 @@ class _MessageListState extends State<MessageList> {
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.refresh),
+            onPressed: () {
+              var _messages = Message.browse();
+              setState(() {
+                messages = _messages;
+              });
+            },
+          )
+        ],
       ),
       body: FutureBuilder(
         future: messages,
