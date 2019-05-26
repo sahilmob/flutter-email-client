@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'Message.dart';
+
 class MessageList extends StatefulWidget {
   final String title;
   MessageList({this.title});
@@ -15,9 +17,12 @@ class _MessageListState extends State<MessageList> {
   var messsages = const [];
 
   Future loadMessageList() async {
-    var content = await rootBundle.loadString("data/messages.json");
+    String content = await rootBundle.loadString("data/messages.json");
+    List collection = json.decode(content);
+    List<Message> _messages =
+        collection.map((m) => Message.fromJson(m)).toList();
     setState(() {
-      messsages = json.decode(content);
+      messsages = _messages;
     });
     print(content);
   }
@@ -37,11 +42,11 @@ class _MessageListState extends State<MessageList> {
         itemCount: messsages.length,
         separatorBuilder: (BuildContext context, int index) => Divider(),
         itemBuilder: (BuildContext context, int index) {
-          var message = messsages[index];
+          Message message = messsages[index];
           return ListTile(
-            title: Text(message['subject']),
+            title: Text(message.subject),
             subtitle: Text(
-              message['body'],
+              message.body,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
             ),
