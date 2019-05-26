@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -14,6 +16,9 @@ class _MessageListState extends State<MessageList> {
 
   Future loadMessageList() async {
     var content = await rootBundle.loadString("data/messages.json");
+    setState(() {
+      messsages = json.decode(content);
+    });
     print(content);
   }
 
