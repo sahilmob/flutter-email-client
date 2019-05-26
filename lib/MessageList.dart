@@ -1,9 +1,8 @@
-import 'dart:convert';
-import "package:http/http.dart" as http;
-
 import 'package:flutter/material.dart';
 
 import 'Message.dart';
+import "./MessageDetail.dart";
+import "./ComposeButton.dart";
 
 class MessageList extends StatefulWidget {
   final String title;
@@ -66,12 +65,22 @@ class _MessageListState extends State<MessageList> {
                     leading: CircleAvatar(
                       child: Text("SM"),
                     ),
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (BuildContext context) => MessageDetail(
+                                    subject: message.subject,
+                                    body: message.body,
+                                  )));
+                    },
                   );
                 },
               );
           }
         },
       ),
+      floatingActionButton: ComposeButton(),
     );
   }
 }
