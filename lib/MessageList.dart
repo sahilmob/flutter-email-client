@@ -14,24 +14,10 @@ class MessageList extends StatefulWidget {
 }
 
 class _MessageListState extends State<MessageList> {
-  List<Message> messsages = const [];
-
-  Future loadMessageList() async {
-    http.Response res =
-        await http.get("http://www.mocky.io/v2/5ceaa7c23300004c2a7c387e");
-    String content = res.body;
-    List collection = json.decode(content);
-    List<Message> _messages =
-        collection.map((m) => Message.fromJson(m)).toList();
-    setState(() {
-      messsages = _messages;
-    });
-    print(content);
-  }
-
+  Future<List<Message>> messages;
   void initState() {
     super.initState();
-    loadMessageList();
+    messages = Message.browse();
   }
 
   @override
@@ -40,23 +26,39 @@ class _MessageListState extends State<MessageList> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: ListView.separated(
-        itemCount: messsages.length,
-        separatorBuilder: (BuildContext context, int index) => Divider(),
-        itemBuilder: (BuildContext context, int index) {
-          Message message = messsages[index];
-          return ListTile(
-            title: Text(message.subject),
-            subtitle: Text(
-              message.body,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-            ),
-            isThreeLine: true,
-            leading: CircleAvatar(
-              child: Text("SM"),
-            ),
-          );
+      body: FutureBuilder(
+        future: messages,
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          switch (snapshot.connectionState) {
+            case ConnectionState.none:
+            case ConnectionState.waiting:
+            case ConnectionState.active:
+              return Center(child: CircularProgressIndicator());
+            case ConnectionState.done:
+              if (snapshot.hasError)
+                return Text("There was an error: ${snapshot.error}");
+              var messages = snapshot.data;
+              return ListView.separated(
+                itemCount: messages.length,
+                separatorBuilder: (BuildContext context, int index) =>
+                    Divider(),
+                itemBuilder: (BuildContext context, int index) {
+                  Message message = messages[index];
+                  return ListTile(
+                    title: Text(message.subject),
+                    subtitle: Text(
+                      message.body,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    isThreeLine: true,
+                    leading: CircleAvatar(
+                      child: Text("SM"),
+                    ),
+                  );
+                },
+              );
+          }
         },
       ),
     );
