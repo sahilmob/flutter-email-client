@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class MessageList extends StatefulWidget {
   final String title;
@@ -10,6 +11,17 @@ class MessageList extends StatefulWidget {
 
 class _MessageListState extends State<MessageList> {
   var messsages = const [];
+
+  Future loadMessageList() async {
+    var content = await rootBundle.loadString("data/messages.json");
+    print(content);
+  }
+
+  void initState() {
+    super.initState();
+    loadMessageList();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
