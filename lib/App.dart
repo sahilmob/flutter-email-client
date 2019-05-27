@@ -1,40 +1,46 @@
+import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
 
-import "./AppDrawer.dart";
-import "./MessageList.dart";
+import './InboxScreen.dart';
+import './ContactsScreen.dart';
+import './CalenderScreen.dart';
 
-class App extends StatelessWidget {
+class App extends StatefulWidget {
+  @override
+  _AppState createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  int _selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      child: Scaffold(
-        appBar: AppBar(
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(Icons.refresh),
-              onPressed: () async {},
-            )
-          ],
-          bottom: TabBar(
-            tabs: <Widget>[
-              Tab(
-                text: "Foucsed",
-              ),
-              Tab(
-                text: "Other",
-              )
-            ],
+    return Scaffold(
+      body: [InboxScreen(), ContactsScreen(), CalenderScreen()]
+          .elementAt(_selectedIndex),
+      bottomNavigationBar: BottomNavigationBar(
+        items: [
+          BottomNavigationBarItem(
+            title: Text("Inbox"),
+            icon: Icon(Icons.mail),
           ),
-        ),
-        drawer: AppDrawer(),
-        body: TabBarView(
-          children: <Widget>[
-            MessageList(status: "foucesd"),
-            MessageList(status: "other"),
-          ],
-        ),
+          BottomNavigationBarItem(
+            title: Text("Contacts"),
+            icon: Icon(Icons.people),
+          ),
+          BottomNavigationBarItem(
+            title: Text("Calender"),
+            icon: Icon(Icons.calendar_today),
+          ),
+        ],
+        onTap: _onBarItemTap,
       ),
-      length: 2,
     );
+  }
+
+  _onBarItemTap(int value) {
+    setState(() {
+      _selectedIndex = value;
+    });
   }
 }
