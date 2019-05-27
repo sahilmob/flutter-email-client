@@ -6,7 +6,8 @@ import "./MessageDetail.dart";
 
 class MessageList extends StatefulWidget {
   final String title;
-  MessageList({this.title});
+  final String status;
+  MessageList({this.title, this.status = "foucesd"});
 
   @override
   State<StatefulWidget> createState() => _MessageListState();
@@ -21,7 +22,7 @@ class _MessageListState extends State<MessageList> {
   }
 
   void fetch() async {
-    future = Message.browse();
+    future = Message.browse(status: widget.status);
     messages = await future;
   }
 
