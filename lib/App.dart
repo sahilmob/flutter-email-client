@@ -34,6 +34,7 @@ class _AppState extends State<App> {
           ),
         ],
         onTap: _onBarItemTap,
+        currentIndex: _selectedIndex,
       ),
     );
   }
