@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
+
 import "./MessageCompose.dart";
+import "./Message.dart";
 
 class ComposeButton extends StatelessWidget {
   @override
@@ -7,15 +9,19 @@ class ComposeButton extends StatelessWidget {
     return FloatingActionButton(
       child: Icon(Icons.add),
       onPressed: () async {
-        String intention = await Navigator.push(
+        Message message = await Navigator.push(
           context,
           MaterialPageRoute(
               builder: (BuildContext context) => MessageCompose()),
         );
-        Scaffold.of(context).showSnackBar(SnackBar(
-          content: Text("Your message is sent with $intention"),
-          backgroundColor: Colors.green,
-        ));
+        if (message != null) {
+          Scaffold.of(context).showSnackBar(
+            SnackBar(
+              content: Text("Your message has been sent"),
+              backgroundColor: Colors.green,
+            ),
+          );
+        }
       },
     );
   }
