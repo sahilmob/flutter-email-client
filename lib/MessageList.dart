@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import "package:font_awesome_flutter/font_awesome_flutter.dart";
+import "package:flutter_slidable/flutter_slidable.dart";
 
 import 'Message.dart';
 import "./MessageDetail.dart";
@@ -60,57 +61,66 @@ class _MessageListState extends State<MessageList> {
                     Divider(),
                 itemBuilder: (BuildContext context, int index) {
                   Message message = messages[index];
-                  return Dismissible(
-                      onDismissed: (direction) {
-                        setState(() {
-                          messages.removeAt(index);
-                        });
-                      },
-                      background: Container(
-                        color: Colors.red[300],
-                        alignment: Alignment.centerRight,
-                        padding: EdgeInsets.all(16),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Icon(
-                              FontAwesomeIcons.trash,
-                              color: Colors.white,
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(4),
-                            ),
-                            Text(
-                              "Delete",
-                              style: TextStyle(color: Colors.white),
-                            )
-                          ],
-                        ),
+                  return Slidable(
+                    actionPane: SlidableDrawerActionPane(),
+                    actionExtentRatio: 0.25,
+                    key: ObjectKey(message),
+                    child: ListTile(
+                      title: Text(message.subject),
+                      subtitle: Text(
+                        message.body,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
                       ),
-                      key: ObjectKey(message),
-                      child: ListTile(
-                        title: Text(message.subject),
-                        subtitle: Text(
-                          message.body,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        isThreeLine: true,
-                        leading: CircleAvatar(
-                          child: Text("SM"),
-                        ),
+                      isThreeLine: true,
+                      leading: CircleAvatar(
+                        child: Text("SM"),
+                      ),
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (BuildContext context) => MessageDetail(
+                                  subject: message.subject,
+                                  body: message.body,
+                                ),
+                          ),
+                        );
+                      },
+                    ),
+                    actions: <Widget>[
+                      IconSlideAction(
+                        caption: 'Archive',
+                        color: Colors.blue,
+                        icon: Icons.archive,
+                        onTap: () {},
+                      ),
+                      IconSlideAction(
+                        caption: 'Share',
+                        color: Colors.indigo,
+                        icon: Icons.share,
+                        onTap: () {},
+                      ),
+                    ],
+                    secondaryActions: <Widget>[
+                      IconSlideAction(
+                        caption: 'More',
+                        color: Colors.black45,
+                        icon: Icons.more_horiz,
+                        onTap: () {},
+                      ),
+                      IconSlideAction(
+                        caption: 'Delete',
+                        color: Colors.red,
+                        icon: Icons.delete,
                         onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (BuildContext context) => MessageDetail(
-                                    subject: message.subject,
-                                    body: message.body,
-                                  ),
-                            ),
-                          );
+                          setState(() {
+                            messages.removeAt(index);
+                          });
                         },
-                      ));
+                      ),
+                    ],
+                  );
                 },
               );
           }
