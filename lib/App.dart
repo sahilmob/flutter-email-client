@@ -29,8 +29,8 @@ class App extends StatelessWidget {
         drawer: AppDrawer(),
         body: TabBarView(
           children: <Widget>[
-            Center(child: Text("Focused")),
-            MessageList(),
+            MessageList(status: "foucesd"),
+            MessageList(status: "other"),
           ],
         ),
       ),
