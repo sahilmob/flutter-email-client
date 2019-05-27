@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import "package:font_awesome_flutter/font_awesome_flutter.dart";
 
 import 'Message.dart';
 import "./MessageDetail.dart";
@@ -89,6 +90,57 @@ class _MessageListState extends State<MessageList> {
         },
       ),
       floatingActionButton: ComposeButton(messages: messages),
+      drawer: Drawer(
+        child: Column(
+          children: <Widget>[
+            Padding(
+              padding: EdgeInsets.only(top: 20),
+              child: ListTile(
+                leading: Icon(FontAwesomeIcons.inbox),
+                title: Text("Inbox"),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 20),
+              child: ListTile(
+                leading: Icon(FontAwesomeIcons.edit),
+                title: Text("Draft"),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 20),
+              child: ListTile(
+                leading: Icon(FontAwesomeIcons.archive),
+                title: Text("Archive"),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 20),
+              child: ListTile(
+                leading: Icon(FontAwesomeIcons.paperPlane),
+                title: Text("Sent"),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(top: 20),
+              child: ListTile(
+                leading: Icon(FontAwesomeIcons.trash),
+                title: Text("Trash"),
+              ),
+            ),
+            Divider(),
+            Expanded(
+              child: Align(
+                alignment: FractionalOffset.bottomCenter,
+                child: ListTile(
+                  leading: Icon(FontAwesomeIcons.cog),
+                  title: Text("Settings"),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }
