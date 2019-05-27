@@ -101,8 +101,19 @@ class _MessageListState extends State<MessageList> {
                     "https://avatars2.githubusercontent.com/u/33333226?s=460&v=4"),
               ),
               otherAccountsPictures: <Widget>[
-                CircleAvatar(
-                  child: Icon(Icons.add),
+                GestureDetector(
+                  onTap: () {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text("Adding new account..."),
+                          );
+                        });
+                  },
+                  child: CircleAvatar(
+                    child: Icon(Icons.add),
+                  ),
                 )
               ],
             ),
