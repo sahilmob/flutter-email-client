@@ -1,6 +1,15 @@
 import "package:flutter/material.dart";
 
-class MessageCompose extends StatelessWidget {
+class MessageCompose extends StatefulWidget {
+  @override
+  _MessageComposeState createState() => _MessageComposeState();
+}
+
+class _MessageComposeState extends State<MessageCompose> {
+  String to;
+  String subject;
+  String body;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,19 +22,19 @@ class MessageCompose extends StatelessWidget {
         children: <Widget>[
           ListTile(
             title: TextField(
-              decoration: InputDecoration(
-                labelText: "To",
-                labelStyle: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ),
+                decoration: InputDecoration(
+                  labelText: "To",
+                  labelStyle: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                onChanged: (value) => to = value),
           ),
           ListTile(
             title: TextField(
-              decoration: InputDecoration(
-                labelText: "Subject",
-                labelStyle: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ),
+                decoration: InputDecoration(
+                  labelText: "Subject",
+                  labelStyle: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                onChanged: (value) => subject = value),
           ),
           ListTile(
             title: TextField(
@@ -34,8 +43,15 @@ class MessageCompose extends StatelessWidget {
                 labelStyle: TextStyle(fontWeight: FontWeight.bold),
               ),
               maxLines: 8,
+              onChanged: (value) => body = value,
             ),
           ),
+          ListTile(
+            title: RaisedButton(
+              child: Text("Send"),
+              onPressed: () {},
+            ),
+          )
         ],
       )),
     );
