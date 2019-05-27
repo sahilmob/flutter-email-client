@@ -35,9 +35,8 @@ class _MessageListState extends State<MessageList> {
           IconButton(
             icon: Icon(Icons.refresh),
             onPressed: () async {
-              var _messages = await Message.browse();
               setState(() {
-                messages = _messages;
+                future = Message.browse();
               });
             },
           )
@@ -61,29 +60,39 @@ class _MessageListState extends State<MessageList> {
                     Divider(),
                 itemBuilder: (BuildContext context, int index) {
                   Message message = messages[index];
-                  return ListTile(
-                    title: Text(message.subject),
-                    subtitle: Text(
-                      message.body,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    isThreeLine: true,
-                    leading: CircleAvatar(
-                      child: Text("SM"),
-                    ),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (BuildContext context) => MessageDetail(
-                                subject: message.subject,
-                                body: message.body,
-                              ),
+                  return Dismissible(
+                      onDismissed: (direction) {
+                        setState(() {
+                          messages.removeAt(index);
+                        });
+                      },
+                      background: Container(
+                        color: Colors.red[300],
+                      ),
+                      key: ObjectKey(message),
+                      child: ListTile(
+                        title: Text(message.subject),
+                        subtitle: Text(
+                          message.body,
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
                         ),
-                      );
-                    },
-                  );
+                        isThreeLine: true,
+                        leading: CircleAvatar(
+                          child: Text("SM"),
+                        ),
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (BuildContext context) => MessageDetail(
+                                    subject: message.subject,
+                                    body: message.body,
+                                  ),
+                            ),
+                          );
+                        },
+                      ));
                 },
               );
           }
