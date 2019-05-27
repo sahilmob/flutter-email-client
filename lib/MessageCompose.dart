@@ -7,31 +7,35 @@ class MessageCompose extends StatelessWidget {
       appBar: AppBar(
         title: Text("Compose New Message"),
       ),
-      body: Container(
-        padding: EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            TextField(
-                decoration: InputDecoration(
-              labelText: "To",
-              labelStyle: TextStyle(fontWeight: FontWeight.bold),
-            )),
-            TextField(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          ListTile(
+            title: TextField(
+              decoration: InputDecoration(
+                labelText: "To",
+                labelStyle: TextStyle(fontWeight: FontWeight.bold),
+              ),
+            ),
+          ),
+          ListTile(
+            title: TextField(
               decoration: InputDecoration(
                 labelText: "Subject",
                 labelStyle: TextStyle(fontWeight: FontWeight.bold),
               ),
             ),
-            TextField(
+          ),
+          ListTile(
+            title: TextField(
               decoration: InputDecoration(
                 labelText: "Body",
                 labelStyle: TextStyle(fontWeight: FontWeight.bold),
               ),
-              maxLines: 5,
+              maxLines: 8,
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
