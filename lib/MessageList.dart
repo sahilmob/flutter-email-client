@@ -122,6 +122,14 @@ class _MessageListState extends State<MessageList> {
               child: ListTile(
                 leading: Icon(FontAwesomeIcons.inbox),
                 title: Text("Inbox"),
+                trailing: Chip(
+                  label: Text(
+                    "11",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold, color: Colors.white),
+                  ),
+                  backgroundColor: Colors.blueGrey,
+                ),
               ),
             ),
             ListTile(
