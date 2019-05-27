@@ -25,6 +25,7 @@ dependencies:
   cupertino_icons: ^0.1.2
   json_annotation: 2.4.0
   http: ^0.12.0+2
+  flutter_slidable: "^0.5.3"
   font_awesome_flutter:
 
 dev_dependencies:
