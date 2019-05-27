@@ -68,6 +68,24 @@ class _MessageListState extends State<MessageList> {
                       },
                       background: Container(
                         color: Colors.red[300],
+                        alignment: Alignment.centerRight,
+                        padding: EdgeInsets.all(16),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Icon(
+                              FontAwesomeIcons.trash,
+                              color: Colors.white,
+                            ),
+                            Padding(
+                              padding: EdgeInsets.all(4),
+                            ),
+                            Text(
+                              "Delete",
+                              style: TextStyle(color: Colors.white),
+                            )
+                          ],
+                        ),
                       ),
                       key: ObjectKey(message),
                       child: ListTile(
