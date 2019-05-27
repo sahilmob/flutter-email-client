@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
 
+import "./Message.dart";
+
 class MessageCompose extends StatefulWidget {
   @override
   _MessageComposeState createState() => _MessageComposeState();
@@ -49,7 +51,10 @@ class _MessageComposeState extends State<MessageCompose> {
           ListTile(
             title: RaisedButton(
               child: Text("Send"),
-              onPressed: () {},
+              onPressed: () {
+                Message message = Message(subject: subject, body: body);
+                Navigator.pop(context, message);
+              },
             ),
           )
         ],
