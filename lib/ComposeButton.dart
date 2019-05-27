@@ -4,6 +4,10 @@ import "./MessageCompose.dart";
 import "./Message.dart";
 
 class ComposeButton extends StatelessWidget {
+  final List<Message> messages;
+
+  ComposeButton({this.messages});
+
   @override
   Widget build(BuildContext context) {
     return FloatingActionButton(
@@ -15,6 +19,7 @@ class ComposeButton extends StatelessWidget {
               builder: (BuildContext context) => MessageCompose()),
         );
         if (message != null) {
+          messages.add(message);
           Scaffold.of(context).showSnackBar(
             SnackBar(
               content: Text("Your message has been sent"),
