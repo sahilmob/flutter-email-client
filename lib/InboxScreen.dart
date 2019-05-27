@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import "./MessageList.dart";
+import "./AppDrawer.dart";
 
 class InboxScreen extends StatelessWidget {
   @override
@@ -9,6 +10,7 @@ class InboxScreen extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
+          title: Text("Inbox"),
           actions: <Widget>[
             IconButton(
               icon: Icon(Icons.refresh),
@@ -26,6 +28,7 @@ class InboxScreen extends StatelessWidget {
             ],
           ),
         ),
+        drawer: AppDrawer(),
         body: TabBarView(
           children: <Widget>[
             MessageList(status: "foucesd"),
