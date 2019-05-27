@@ -93,6 +93,19 @@ class _MessageListState extends State<MessageList> {
       drawer: Drawer(
         child: Column(
           children: <Widget>[
+            UserAccountsDrawerHeader(
+              accountEmail: Text("myemail@email.com"),
+              accountName: Text("My Name"),
+              currentAccountPicture: CircleAvatar(
+                backgroundImage: NetworkImage(
+                    "https://avatars2.githubusercontent.com/u/33333226?s=460&v=4"),
+              ),
+              otherAccountsPictures: <Widget>[
+                CircleAvatar(
+                  child: Icon(Icons.add),
+                )
+              ],
+            ),
             Padding(
               padding: EdgeInsets.only(top: 20),
               child: ListTile(
@@ -100,33 +113,21 @@ class _MessageListState extends State<MessageList> {
                 title: Text("Inbox"),
               ),
             ),
-            Padding(
-              padding: EdgeInsets.only(top: 20),
-              child: ListTile(
-                leading: Icon(FontAwesomeIcons.edit),
-                title: Text("Draft"),
-              ),
+            ListTile(
+              leading: Icon(FontAwesomeIcons.edit),
+              title: Text("Draft"),
             ),
-            Padding(
-              padding: EdgeInsets.only(top: 20),
-              child: ListTile(
-                leading: Icon(FontAwesomeIcons.archive),
-                title: Text("Archive"),
-              ),
+            ListTile(
+              leading: Icon(FontAwesomeIcons.archive),
+              title: Text("Archive"),
             ),
-            Padding(
-              padding: EdgeInsets.only(top: 20),
-              child: ListTile(
-                leading: Icon(FontAwesomeIcons.paperPlane),
-                title: Text("Sent"),
-              ),
+            ListTile(
+              leading: Icon(FontAwesomeIcons.paperPlane),
+              title: Text("Sent"),
             ),
-            Padding(
-              padding: EdgeInsets.only(top: 20),
-              child: ListTile(
-                leading: Icon(FontAwesomeIcons.trash),
-                title: Text("Trash"),
-              ),
+            ListTile(
+              leading: Icon(FontAwesomeIcons.trash),
+              title: Text("Trash"),
             ),
             Divider(),
             Expanded(
