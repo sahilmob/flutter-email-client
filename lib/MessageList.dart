@@ -13,10 +13,16 @@ class MessageList extends StatefulWidget {
 }
 
 class _MessageListState extends State<MessageList> {
-  Future<List<Message>> messages;
+  Future<List<Message>> future;
+  List<Message> messages;
   void initState() {
     super.initState();
-    messages = Message.browse();
+    fetch();
+  }
+
+  void fetch() async {
+    future = Message.browse();
+    messages = await future;
   }
 
   @override
@@ -27,8 +33,8 @@ class _MessageListState extends State<MessageList> {
         actions: <Widget>[
           IconButton(
             icon: Icon(Icons.refresh),
-            onPressed: () {
-              var _messages = Message.browse();
+            onPressed: () async {
+              var _messages = await Message.browse();
               setState(() {
                 messages = _messages;
               });
@@ -37,7 +43,7 @@ class _MessageListState extends State<MessageList> {
         ],
       ),
       body: FutureBuilder(
-        future: messages,
+        future: future,
         builder: (BuildContext context, AsyncSnapshot snapshot) {
           switch (snapshot.connectionState) {
             case ConnectionState.none:
@@ -67,12 +73,14 @@ class _MessageListState extends State<MessageList> {
                     ),
                     onTap: () {
                       Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (BuildContext context) => MessageDetail(
-                                    subject: message.subject,
-                                    body: message.body,
-                                  )));
+                        context,
+                        MaterialPageRoute(
+                          builder: (BuildContext context) => MessageDetail(
+                                subject: message.subject,
+                                body: message.body,
+                              ),
+                        ),
+                      );
                     },
                   );
                 },
@@ -80,7 +88,7 @@ class _MessageListState extends State<MessageList> {
           }
         },
       ),
-      floatingActionButton: ComposeButton(),
+      floatingActionButton: ComposeButton(messages: messages),
     );
   }
 }
