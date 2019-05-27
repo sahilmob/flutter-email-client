@@ -7,7 +7,8 @@ class MessageCompose extends StatelessWidget {
       appBar: AppBar(
         title: Text("Compose New Message"),
       ),
-      body: Column(
+      body: SingleChildScrollView(
+          child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           ListTile(
@@ -36,7 +37,7 @@ class MessageCompose extends StatelessWidget {
             ),
           ),
         ],
-      ),
+      )),
     );
   }
 }
