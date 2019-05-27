@@ -12,27 +12,24 @@ class MessageCompose extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text(
-              "Compose New Message",
-              style: Theme.of(context).textTheme.title,
+            TextField(
+                decoration: InputDecoration(
+              labelText: "To",
+              labelStyle: TextStyle(fontWeight: FontWeight.bold),
+            )),
+            TextField(
+              decoration: InputDecoration(
+                labelText: "Subject",
+                labelStyle: TextStyle(fontWeight: FontWeight.bold),
+              ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                RaisedButton(
-                  child: Text("Love"),
-                  onPressed: () {
-                    Navigator.pop(context, "Love");
-                  },
-                ),
-                RaisedButton(
-                  child: Text("Hate"),
-                  onPressed: () {
-                    Navigator.pop(context, "Hate");
-                  },
-                )
-              ],
-            )
+            TextField(
+              decoration: InputDecoration(
+                labelText: "Body",
+                labelStyle: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              maxLines: 5,
+            ),
           ],
         ),
       ),
