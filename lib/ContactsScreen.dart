@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import "./AppDrawer.dart";
 import "./ContactManager.dart";
+import "./models/Contact.dart";
 
 class ContactsScreen extends StatelessWidget {
   ContactManager manager = ContactManager();
@@ -32,19 +33,33 @@ class ContactsScreen extends StatelessWidget {
           ],
         ),
         drawer: AppDrawer(),
-        body: StreamBuilder<List<String>>(
+        body: StreamBuilder<List<Contact>>(
           stream: manager.contactListNow,
-          builder: (BuildContext context, snapshot) {
-            List<String> contacts = snapshot.data;
-            return ListView.separated(
-              itemCount: contacts.length,
-              itemBuilder: (BuildContext context, index) => ListTile(
-                    title: Text(contacts[index]),
-                  ),
-              separatorBuilder: (BuildContext context, int index) {
-                return Divider();
-              },
-            );
+          builder:
+              (BuildContext context, AsyncSnapshot<List<Contact>> snapshot) {
+            switch (snapshot.connectionState) {
+              case ConnectionState.none:
+              case ConnectionState.waiting:
+              case ConnectionState.active:
+                return Center(child: CircularProgressIndicator());
+              case ConnectionState.done:
+                ;
+                List<Contact> contacts = snapshot.data;
+                return ListView.separated(
+                  itemCount: contacts.length,
+                  itemBuilder: (BuildContext context, index) {
+                    Contact _contact = contacts[index];
+                    return ListTile(
+                      title: Text(_contact.name),
+                      subtitle: Text(_contact.email),
+                      leading: CircleAvatar(),
+                    );
+                  },
+                  separatorBuilder: (BuildContext context, int index) {
+                    return Divider();
+                  },
+                );
+            }
           },
         ),
       ),
