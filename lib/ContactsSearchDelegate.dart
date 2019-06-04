@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 
-import "./models/Contact.dart";
+import "./ContactListBuilder.dart";
+import 'models/Contact.dart';
 
 class ContactsSearchDelegate extends SearchDelegate {
   final manager;
@@ -36,31 +37,23 @@ class ContactsSearchDelegate extends SearchDelegate {
         child: Text("Search query must be 3 letters or more"),
       );
     }
-    return StreamBuilder<List<Contact>>(
+    return ContactListBuilder(
       stream: manager.filteredCollection(query: query),
-      builder: (BuildContext context, AsyncSnapshot<List<Contact>> snapshot) {
-        switch (snapshot.connectionState) {
-          case ConnectionState.none:
-          case ConnectionState.waiting:
-          case ConnectionState.active:
-            return Center(child: CircularProgressIndicator());
-          case ConnectionState.done:
-            List<Contact> contacts = snapshot.data;
-            return ListView.separated(
-              itemCount: contacts.length,
-              itemBuilder: (BuildContext context, index) {
-                Contact _contact = contacts[index];
-                return ListTile(
-                  title: Text(_contact.name),
-                  subtitle: Text(_contact.email),
-                  leading: CircleAvatar(),
-                );
-              },
-              separatorBuilder: (BuildContext context, int index) {
-                return Divider();
-              },
+      builder: (context, contacts) {
+        return ListView.separated(
+          itemCount: contacts.length,
+          itemBuilder: (BuildContext context, index) {
+            Contact _contact = contacts[index];
+            return ListTile(
+              title: Text(_contact.name),
+              subtitle: Text(_contact.email),
+              leading: CircleAvatar(),
             );
-        }
+          },
+          separatorBuilder: (BuildContext context, int index) {
+            return Divider();
+          },
+        );
       },
     );
   }
