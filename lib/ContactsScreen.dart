@@ -7,10 +7,12 @@ import "./models/Contact.dart";
 import "./ContactsSearchDelegate.dart";
 import "./ContactListBuilder.dart";
 import "./ContactCounter.dart";
+import 'Overseer.dart';
 
 class ContactsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    ContactManager manager = Provider.of(context).fetch(ContactManager);
     return DefaultTabController(
       child: Scaffold(
           appBar: AppBar(
@@ -33,6 +35,7 @@ class ContactsScreen extends StatelessWidget {
           ),
           drawer: AppDrawer(),
           body: ContactListBuilder(
+            stream: manager.contactListNow,
             builder: (context, contacts) {
               return ListView.separated(
                 itemCount: contacts.length,
