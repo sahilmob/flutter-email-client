@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import "./AppDrawer.dart";
 import "./ContactManager.dart";
 import "./models/Contact.dart";
+import "./ContactsSearchDelegate.dart";
 
 class ContactsScreen extends StatelessWidget {
   ContactManager manager = ContactManager();
@@ -26,6 +27,15 @@ class ContactsScreen extends StatelessWidget {
                   );
                 },
               ),
+            ),
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+                showSearch(
+                  context: context,
+                  delegate: ContactsSearchDelegate(manager: manager),
+                );
+              },
             ),
             Padding(
               padding: EdgeInsets.only(right: 16),
