@@ -12,7 +12,9 @@ class ContactsSearchDelegate extends SearchDelegate {
     return [
       IconButton(
         icon: Icon(Icons.clear),
-        onPressed: () {},
+        onPressed: () {
+          query = "";
+        },
       )
     ];
   }
