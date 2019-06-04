@@ -1,6 +1,8 @@
 import "package:flutter/material.dart";
 
 import "./ContactListBuilder.dart";
+import 'ContactManager.dart';
+import 'Provider.dart';
 import 'models/Contact.dart';
 
 class ContactsSearchDelegate extends SearchDelegate {
@@ -32,13 +34,14 @@ class ContactsSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
+    ContactManager manager = Provider.of(context);
+
     if (query.length < 3) {
       return Center(
         child: Text("Search query must be 3 letters or more"),
       );
     }
     return ContactListBuilder(
-      stream: manager.filteredCollection(query: query),
       builder: (context, contacts) {
         return ListView.separated(
           itemCount: contacts.length,
