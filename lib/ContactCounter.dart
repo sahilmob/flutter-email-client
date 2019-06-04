@@ -5,7 +5,7 @@ import "./Provider.dart";
 class ContactCounter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    ContactManager manager = Provider.of(context);
+    ContactManager manager = Provider.of<ContactManager>(context);
     return Chip(
       backgroundColor: Colors.red,
       label: StreamBuilder<int>(
