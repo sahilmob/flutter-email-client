@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import "./AppDrawer.dart";
+import "./FabButton.dart";
+import "./Counter.dart";
 
 class CalenderScreen extends StatelessWidget {
   @override
@@ -10,8 +12,9 @@ class CalenderScreen extends StatelessWidget {
       ),
       drawer: AppDrawer(),
       body: Center(
-        child: Text("Calender screen"),
+        child: Counter(),
       ),
+      floatingActionButton: FabButton(),
     );
   }
 }
