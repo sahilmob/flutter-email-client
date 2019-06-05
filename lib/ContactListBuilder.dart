@@ -1,9 +1,6 @@
 import 'package:emailapp/models/Contact.dart';
 import "package:flutter/material.dart";
 
-import 'ContactManager.dart';
-import 'Provider.dart';
-
 class ContactListBuilder extends StatelessWidget {
   final Function builder;
   final Stream stream;
