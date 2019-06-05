@@ -1,4 +1,5 @@
 import 'package:emailapp/CounterManager.dart';
+import 'package:emailapp/Observer.dart';
 import 'package:emailapp/Provider.dart';
 import 'package:flutter/material.dart';
 
@@ -7,11 +8,10 @@ class Counter extends StatelessWidget {
   Widget build(BuildContext context) {
     CounterManager manager = Provider.of(context).fetch(CounterManager);
     return Center(
-      child: StreamBuilder(
-        initialData: 0,
+      child: Observer<int>(
         stream: manager.counter$,
-        builder: (BuildContext context, AsyncSnapshot snapshot) {
-          return Text("Calender: ${snapshot.data}");
+        onSuccess: (context, data) {
+          return Text("Calender: $data");
         },
       ),
     );
