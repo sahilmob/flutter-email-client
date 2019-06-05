@@ -7,7 +7,6 @@ import "./models/Contact.dart";
 import "./ContactsSearchDelegate.dart";
 import "./ContactListBuilder.dart";
 import "./ContactCounter.dart";
-import 'Overseer.dart';
 
 class ContactsScreen extends StatelessWidget {
   @override
@@ -35,7 +34,7 @@ class ContactsScreen extends StatelessWidget {
           ),
           drawer: AppDrawer(),
           body: ContactListBuilder(
-            stream: manager.contactListNow,
+            stream: manager.browse$(),
             builder: (context, contacts) {
               return ListView.separated(
                 itemCount: contacts.length,
