@@ -12,6 +12,9 @@ class ContactsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ContactManager manager = Provider.of(context).fetch(ContactManager);
+
+    manager.inFilter.add("");
+
     return DefaultTabController(
       child: Scaffold(
           appBar: AppBar(
@@ -34,7 +37,7 @@ class ContactsScreen extends StatelessWidget {
           ),
           drawer: AppDrawer(),
           body: ContactListBuilder(
-            stream: manager.browse$(),
+            stream: manager.browse$,
             builder: (context, contacts) {
               return ListView.separated(
                 itemCount: contacts.length,
