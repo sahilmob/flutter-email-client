@@ -1,7 +1,6 @@
 import "package:flutter/material.dart";
 
 import "./Provider.dart";
-import './ContactManager.dart';
 import "./App.dart";
 import "./Overseer.dart";
 
