@@ -34,6 +34,11 @@ class ContactsSearchDelegate extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
+    return Container();
+  }
+
+  @override
+  Widget buildSuggestions(BuildContext context) {
     ContactManager manager = Provider.of(context).fetch(ContactManager);
 
     if (query.length < 3) {
@@ -63,10 +68,5 @@ class ContactsSearchDelegate extends SearchDelegate {
         );
       },
     );
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    return Container();
   }
 }
