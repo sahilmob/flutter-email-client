@@ -15,8 +15,9 @@ class ContactManager {
   ContactManager() {
     _filterSubject
         .debounceTime(Duration(milliseconds: 500))
-        .listen((filter) async {
-      var contacts = await ConactService.browse(query: filter);
+        .switchMap((filter) async* {
+      yield await ConactService.browse(query: filter);
+    }).listen((contacts) async {
       _collectionSubject.add(contacts);
     });
 
