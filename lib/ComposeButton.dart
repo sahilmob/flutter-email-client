@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 
-import "./MessageCompose.dart";
+import "./screen/MessageCompose.dart";
 import "./Message.dart";
 
 class ComposeButton extends StatelessWidget {

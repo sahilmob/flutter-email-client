@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import "package:flutter_slidable/flutter_slidable.dart";
 
 import 'Message.dart';
-import "./MessageDetail.dart";
+import "./screen/MessageDetail.dart";
 
 class MessageList extends StatefulWidget {
   final String title;

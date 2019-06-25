@@ -2,8 +2,8 @@ import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
 
 import './InboxScreen.dart';
-import './ContactsScreen.dart';
-import './CalenderScreen.dart';
+import './screen/ContactsScreen.dart';
+import './screen/CalenderScreen.dart';
 
 class App extends StatefulWidget {
   @override

@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 
-import "./Message.dart";
+import "../Message.dart";
 
 class MessageCompose extends StatefulWidget {
   @override
