@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 
 import "../ContactListBuilder.dart";
-import '../ContactManager.dart';
+import '../manager/ContactManager.dart';
 import '../Provider.dart';
 import '../models/Contact.dart';
 

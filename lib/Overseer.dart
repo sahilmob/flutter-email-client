@@ -1,5 +1,5 @@
-import 'ContactManager.dart';
-import "CounterManager.dart";
+import './manager/ContactManager.dart';
+import "./manager/CounterManager.dart";
 
 class Overseer {
   Map<dynamic, dynamic> repository = {};

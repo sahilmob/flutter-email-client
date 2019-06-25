@@ -2,7 +2,7 @@ import 'package:emailapp/Provider.dart';
 import 'package:flutter/material.dart';
 
 import "../AppDrawer.dart";
-import "../ContactManager.dart";
+import "../manager/ContactManager.dart";
 import "../models/Contact.dart";
 import "./ContactsSearchDelegate.dart";
 import "../ContactListBuilder.dart";

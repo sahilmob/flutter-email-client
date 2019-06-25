@@ -1,7 +1,7 @@
 import "package:rxdart/rxdart.dart";
 
-import "./services/ContactService.dart";
-import './models/Contact.dart';
+import "../services/ContactService.dart";
+import '../models/Contact.dart';
 
 class ContactManager {
   final PublishSubject<String> _filterSubject = PublishSubject<String>();

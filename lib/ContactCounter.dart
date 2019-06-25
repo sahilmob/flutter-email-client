@@ -1,4 +1,4 @@
-import 'package:emailapp/ContactManager.dart';
+import './manager/ContactManager.dart';
 import 'package:emailapp/Observer.dart';
 import "package:flutter/material.dart";
 import "./Provider.dart";
