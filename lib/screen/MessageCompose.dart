@@ -1,6 +1,10 @@
+import 'package:emailapp/Provider.dart';
 import "package:flutter/material.dart";
+import 'package:rxdart/rxdart.dart';
 
 import "../Message.dart";
+import '../Observer.dart';
+import "../manager/MessageFormManager.dart";
 
 class MessageCompose extends StatefulWidget {
   @override
@@ -13,9 +17,9 @@ class _MessageComposeState extends State<MessageCompose> {
   String body;
 
   final GlobalKey<FormState> key = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
+    MessageFormManager manager = Provider.of(context).fetch(MessageFormManager);
     return Scaffold(
       appBar: AppBar(
         title: Text("Compose New Message"),
@@ -27,14 +31,26 @@ class _MessageComposeState extends State<MessageCompose> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             ListTile(
-              title: TextFormField(
-                  validator: (value) =>
-                      !value.contains("@") ? "To must be a valid email" : null,
-                  decoration: InputDecoration(
-                    labelText: "To",
-                    labelStyle: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  onSaved: (value) => to = value),
+              title: Observer(
+                stream: manager.email$,
+                onSuccess: (context, data) {
+                  return TextField(
+                    onChanged: manager.inEmail.add,
+                    decoration: InputDecoration(
+                      labelText: "To",
+                      labelStyle: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  );
+                },
+                onError: (context, err) {
+                  return TextField(
+                    decoration: InputDecoration(
+                        labelText: "TO (error)",
+                        labelStyle: TextStyle(fontWeight: FontWeight.bold),
+                        errorText: "This field is invalid"),
+                  );
+                },
+              ),
             ),
             ListTile(
               title: TextFormField(
