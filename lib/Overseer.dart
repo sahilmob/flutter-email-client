@@ -1,3 +1,5 @@
+import 'package:emailapp/manager/MessageFormManager.dart';
+
 import './manager/ContactManager.dart';
 import "./manager/CounterManager.dart";
 
@@ -7,6 +9,7 @@ class Overseer {
   Overseer() {
     register(ContactManager, ContactManager());
     register(CounterManager, CounterManager());
+    register(MessageFormManager, MessageFormManager());
   }
 
   register(name, object) {
