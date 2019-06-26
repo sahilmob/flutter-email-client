@@ -31,7 +31,7 @@ class _MessageComposeState extends State<MessageCompose> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             ListTile(
-              title: Observer(
+              title: Observer<String>(
                 stream: manager.email$,
                 onSuccess: (context, data) {
                   return TextField(
@@ -45,9 +45,10 @@ class _MessageComposeState extends State<MessageCompose> {
                 onError: (context, err) {
                   return TextField(
                     decoration: InputDecoration(
-                        labelText: "TO (error)",
-                        labelStyle: TextStyle(fontWeight: FontWeight.bold),
-                        errorText: "This field is invalid"),
+                      labelText: "TO (error)",
+                      labelStyle: TextStyle(fontWeight: FontWeight.bold),
+                      errorText: err,
+                    ),
                   );
                 },
               ),
