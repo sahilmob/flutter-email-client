@@ -44,6 +44,7 @@ class _MessageComposeState extends State<MessageCompose> {
                 },
                 onError: (context, err) {
                   return TextField(
+                    onChanged: manager.inEmail.add,
                     decoration: InputDecoration(
                       labelText: "TO (error)",
                       labelStyle: TextStyle(fontWeight: FontWeight.bold),
